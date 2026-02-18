@@ -42,6 +42,7 @@ export class Game {
             const guess1 = guess.trim().toLowerCase();
             if(this.validateGuess(guess1)){
                 console.log("Your guess is valid ", guess1); 
+                console.log(this.giveFeedback(guess1));
             }
             else {
                 console.log(chalk.red("your guess is not valid. Try again."));
@@ -53,5 +54,13 @@ export class Game {
     validateGuess(guessWord){
         const isAlphabetic = /^[A-Za-z]+$/.test(guessWord);
         return guessWord.length === 5 && isAlphabetic;
+    }
+
+    giveFeedback(guessWord) {
+        let result = "";
+        for(let i=0; i<guessWord.length; i++){
+                result += this.selectedWord[i] === guessWord[i]? chalk.green(guessWord[i]): this.selectedWord.includes(guessWord[i])? chalk.yellow(guessWord[i]) : chalk.gray(guessWord[i]);    
+        }
+        return result;
     }
 }
