@@ -21,7 +21,8 @@ export class Game {
     loadGame(){
         console.log("Welcome to to WORDLE!!!");
         console.log("Remember you have only 6 attempts");
-        console.log(chalk.red("hellow..."))
+
+        this.yourGuess();
     }
 
     loadWords(){
@@ -29,5 +30,28 @@ export class Game {
         words =  words.split("\r\n").map(word => word.trim());
         const randomIndex = Math.floor(Math.random() * words.length);
         return words[randomIndex];
+    }
+
+    yourGuess(){
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        })
+
+        rl.question("Enter your guess: ", (guess)=>{
+            const guess1 = guess.trim().toLowerCase();
+            if(this.validateGuess(guess1)){
+                console.log("Your guess is valid ", guess1); 
+            }
+            else {
+                console.log(chalk.red("your guess is not valid. Try again."));
+            }
+            
+        })
+    }
+
+    validateGuess(guessWord){
+        const isAlphabetic = /^[A-Za-z]+$/.test(guessWord);
+        return guessWord.length === 5 && isAlphabetic;
     }
 }
