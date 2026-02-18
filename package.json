@@ -1,0 +1,26 @@
+{
+  "name": "wordle",
+  "version": "1.0.0",
+  "description": "a game",
+  "keywords": [
+    "wordle"
+  ],
+  "homepage": "https://github.com/Exopi-Talent-Academy/wordle#readme",
+  "bugs": {
+    "url": "https://github.com/Exopi-Talent-Academy/wordle/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Exopi-Talent-Academy/wordle.git"
+  },
+  "license": "ISC",
+  "author": "bhuwan",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2"
+  }
+}
