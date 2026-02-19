@@ -57,6 +57,7 @@ export class Game {
             {
                 console.log("Congratulations... you won the game.");
                 this.saveResult(true);
+                this.showStatistics();
                 return;
                
             }else if(this.attempts < this.maxAttempts) {
@@ -64,6 +65,7 @@ export class Game {
                this.yourGuess();
             } else {
                 this.saveResult(false);
+                this.showStatistics();
                 console.log("Game is Over. Sorry for your Badluck. Word is: ", this.selectedWord);
                 return;
             }
@@ -74,13 +76,48 @@ export class Game {
 
 
     saveResult(win){
-        let content = win + ' ' + this.attempts ;
-        fs.writeFile("./src/data/result.txt", content, err=>{
+        let content = win + ' ' + this.attempts + "\n";
+        fs.writeFile("./src/data/result.txt", content, {flag: 'a+'}, err=>{
             if(err){
                 console.log(err);
             }else {
                 console.log("files saved successfully....");
             }
         } )
+    }
+
+    showStatistics(){
+        let content = fs.readFileSync("./src/data/result.txt", "utf8");
+        let result = content.split("\n").map(res => res.trim()).filter(res => res !== "");
+        let res = this.mapResult(result);
+        console.table([{total: result.length, first: res.first, second: res.second, third: res.third, fourth: res.fourth, fifth: res.fifth, sixth: res.sixth}], ['total', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth']);
+    }
+
+    mapResult(result){
+        let res = {
+            first: 0,
+            second: 0,
+            third: 0,
+            fourth:0,
+            fifth: 0,
+            sixth: 0,
+         }
+
+          const keys = ["first", "second", "third", "fourth", "fifth", "sixth"];
+
+
+          for(const item of result) {
+            let [win, times] = item.split(" ").map(res => res.trim());
+            if(win === "true"){
+               const index = Number(times) - 1;
+               if(index >= 0 && index < keys.length) {
+                res[keys[index]]++;
+               }
+            }
+            
+
+        }
+      
+        return res;
     }
 }
