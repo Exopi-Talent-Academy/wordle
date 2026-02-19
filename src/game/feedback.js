@@ -7,3 +7,7 @@ export function giveFeedback(guessWord, selectedWord) {
         }
         return result;
     }
+
+export function errorMessage(){
+        console.log(chalk.red("your guess is not valid. Try again."));
+}

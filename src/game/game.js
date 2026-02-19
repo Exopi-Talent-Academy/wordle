@@ -7,7 +7,7 @@
 import readline from "readline";
 
 import { validateGuess } from "../utils/validation.js";
-import { giveFeedback } from "./feedback.js";
+import { giveFeedback, errorMessage } from "./feedback.js";
 import { showStatistics, loadWords, saveResult } from "../services/fileHandle.js";
 
 
@@ -41,7 +41,7 @@ export class Game {
                 
             }
             else {
-                console.log(chalk.red("your guess is not valid. Try again."));
+                errorMessage();
             }
 
             rl.close();
