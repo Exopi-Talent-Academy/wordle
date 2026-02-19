@@ -48,7 +48,7 @@ export class Game {
 
             if(guess === this.selectedWord)
             {
-                console.log("Congratulations... you won the game.");
+                console.log("Congratulations... you won the game:", this.attempts , this.attempts > 1? " attempts.": "attempt" );
                 saveResult(true, this.attempts);
                 showStatistics();
                 return;
