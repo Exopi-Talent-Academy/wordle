@@ -74,6 +74,13 @@ export class Game {
 
 
     saveResult(win){
-        console.log("And the result is saved", win, this.attempts);
+        let content = win + ' ' + this.attempts ;
+        fs.writeFile("./src/data/result.txt", content, err=>{
+            if(err){
+                console.log(err);
+            }else {
+                console.log("files saved successfully....");
+            }
+        } )
     }
 }
