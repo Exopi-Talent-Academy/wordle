@@ -4,13 +4,11 @@
     const feedback = require("./feedback");
     const chalk = require("chalk");
 */
-
-import fs from "fs";
 import readline from "readline";
 
 import { validateGuess } from "../utils/validation.js";
 import { giveFeedback } from "./feedback.js";
-import { mapResult } from "../utils/helper.js"
+import { showStatistics, loadWords, saveResult } from "../services/fileHandle.js";
 
 
 export class Game {
@@ -18,7 +16,7 @@ export class Game {
         this.wordLength = 5;
         this.maxAttempts = 6;
         this.attempts = 0;
-        this.selectedWord = this.loadWords();
+        this.selectedWord = loadWords();
     }
 
     loadGame(){
@@ -28,12 +26,6 @@ export class Game {
         this.yourGuess();
     }
 
-    loadWords(){
-        let words = fs.readFileSync("./src/data/words.txt", "utf8");
-        words =  words.split("\r\n").map(word => word.trim());
-        const randomIndex = Math.floor(Math.random() * words.length);
-        return words[randomIndex];
-    }
 
     yourGuess(){
         const rl = readline.createInterface({
@@ -57,16 +49,16 @@ export class Game {
             if(guess === this.selectedWord)
             {
                 console.log("Congratulations... you won the game.");
-                this.saveResult(true);
-                this.showStatistics();
+                saveResult(true, this.attempts);
+                showStatistics();
                 return;
                
             }else if(this.attempts < this.maxAttempts) {
                
                this.yourGuess();
             } else {
-                this.saveResult(false);
-                this.showStatistics();
+                saveResult(false, this.attempts);
+                showStatistics();
                 console.log("Game is Over. Sorry for your Badluck. Word is: ", this.selectedWord);
                 return;
             }
@@ -74,24 +66,4 @@ export class Game {
         })
 
     }
-
-
-    saveResult(win){
-        let content = win + ' ' + this.attempts + "\n";
-        fs.writeFileSync("./src/data/result.txt", content, {flag: 'a+'}, err=>{
-            if(err){
-                console.log(err);
-            }else {
-                console.log("files saved successfully....");
-            }
-        } )
-    }
-
-    showStatistics(){
-        let content = fs.readFileSync("./src/data/result.txt", "utf8");
-        let result = content.split("\n").map(res => res.trim()).filter(res => res !== "");
-        let res = mapResult(result);
-        console.table([{total: result.length, first: res.first, second: res.second, third: res.third, fourth: res.fourth, fifth: res.fifth, sixth: res.sixth}], ['total', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth']);
-    }
-
 }
