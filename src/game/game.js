@@ -10,6 +10,7 @@ import readline from "readline";
 
 import { validateGuess } from "../utils/validation.js";
 import { giveFeedback } from "./feedback.js";
+import { mapResult } from "../utils/helper.js"
 
 
 export class Game {
@@ -89,35 +90,8 @@ export class Game {
     showStatistics(){
         let content = fs.readFileSync("./src/data/result.txt", "utf8");
         let result = content.split("\n").map(res => res.trim()).filter(res => res !== "");
-        let res = this.mapResult(result);
+        let res = mapResult(result);
         console.table([{total: result.length, first: res.first, second: res.second, third: res.third, fourth: res.fourth, fifth: res.fifth, sixth: res.sixth}], ['total', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth']);
     }
 
-    mapResult(result){
-        let res = {
-            first: 0,
-            second: 0,
-            third: 0,
-            fourth:0,
-            fifth: 0,
-            sixth: 0,
-         }
-
-          const keys = ["first", "second", "third", "fourth", "fifth", "sixth"];
-
-
-          for(const item of result) {
-            let [win, times] = item.split(" ").map(res => res.trim());
-            if(win === "true"){
-               const index = Number(times) - 1;
-               if(index >= 0 && index < keys.length) {
-                res[keys[index]]++;
-               }
-            }
-            
-
-        }
-      
-        return res;
-    }
 }
