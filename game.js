@@ -56,13 +56,15 @@ export class Game {
             if(guess === this.selectedWord)
             {
                 console.log("Congratulations... you won the game.");
+                this.saveResult(true);
                 return;
                
             }else if(this.attempts < this.maxAttempts) {
                
                this.yourGuess();
             } else {
-                console.log("Game is Over. Sorry for your Badluck.")
+                this.saveResult(false);
+                console.log("Game is Over. Sorry for your Badluck. Word is: ", this.selectedWord);
                 return;
             }
             
@@ -81,5 +83,9 @@ export class Game {
                 result += this.selectedWord[i] === guessWord[i]? chalk.green(guessWord[i]): this.selectedWord.includes(guessWord[i])? chalk.yellow(guessWord[i]) : chalk.gray(guessWord[i]);    
         }
         return result;
+    }
+
+    saveResult(win){
+        console.log("And the result is saved", win, this.attempts);
     }
 }
