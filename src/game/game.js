@@ -16,7 +16,7 @@ import { mapResult } from "../utils/helper.js"
 export class Game {
     constructor(){
         this.wordLength = 5;
-        this.maxAttempts = 2;
+        this.maxAttempts = 6;
         this.attempts = 0;
         this.selectedWord = this.loadWords();
     }
@@ -78,7 +78,7 @@ export class Game {
 
     saveResult(win){
         let content = win + ' ' + this.attempts + "\n";
-        fs.writeFile("./src/data/result.txt", content, {flag: 'a+'}, err=>{
+        fs.writeFileSync("./src/data/result.txt", content, {flag: 'a+'}, err=>{
             if(err){
                 console.log(err);
             }else {
