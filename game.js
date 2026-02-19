@@ -14,7 +14,8 @@ import chalk from "chalk";
 export class Game {
     constructor(){
         this.wordLength = 5;
-        this.maxAttempts = 6;
+        this.maxAttempts = 2;
+        this.attempts = 0;
         this.selectedWord = this.loadWords();
     }
 
@@ -38,17 +39,35 @@ export class Game {
             output: process.stdout
         })
 
-        rl.question("Enter your guess: ", (guess)=>{
-            const guess1 = guess.trim().toLowerCase();
-            if(this.validateGuess(guess1)){
-                console.log("Your guess is valid ", guess1); 
-                console.log(this.giveFeedback(guess1));
+        rl.question("Enter your guess: ", (userInput)=>{
+            const guess = userInput.trim().toLowerCase();
+            if(this.validateGuess(guess)){
+                this.attempts += 1;
+                console.log("Your guess is valid ", guess); 
+                console.log(this.giveFeedback(guess));
+                
             }
             else {
                 console.log(chalk.red("your guess is not valid. Try again."));
             }
+
+            rl.close();
+
+            if(guess === this.selectedWord)
+            {
+                console.log("Congratulations... you won the game.");
+                return;
+               
+            }else if(this.attempts < this.maxAttempts) {
+               
+               this.yourGuess();
+            } else {
+                console.log("Game is Over. Sorry for your Badluck.")
+                return;
+            }
             
         })
+
     }
 
     validateGuess(guessWord){
