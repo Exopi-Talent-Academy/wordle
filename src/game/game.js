@@ -8,7 +8,8 @@
 import fs from "fs";
 import readline from "readline";
 
-import chalk from "chalk";
+import { validateGuess } from "../utils/validation.js";
+import { giveFeedback } from "./feedback.js";
 
 
 export class Game {
@@ -27,7 +28,7 @@ export class Game {
     }
 
     loadWords(){
-        let words = fs.readFileSync("words.txt", "utf8");
+        let words = fs.readFileSync("./src/data/words.txt", "utf8");
         words =  words.split("\r\n").map(word => word.trim());
         const randomIndex = Math.floor(Math.random() * words.length);
         return words[randomIndex];
@@ -41,10 +42,9 @@ export class Game {
 
         rl.question("Enter your guess: ", (userInput)=>{
             const guess = userInput.trim().toLowerCase();
-            if(this.validateGuess(guess)){
+            if(validateGuess(guess)){
                 this.attempts += 1;
-                console.log("Your guess is valid ", guess); 
-                console.log(this.giveFeedback(guess));
+                console.log("Your guess is valid:=>   ", giveFeedback(guess, this.selectedWord));
                 
             }
             else {
@@ -72,18 +72,6 @@ export class Game {
 
     }
 
-    validateGuess(guessWord){
-        const isAlphabetic = /^[A-Za-z]+$/.test(guessWord);
-        return guessWord.length === 5 && isAlphabetic;
-    }
-
-    giveFeedback(guessWord) {
-        let result = "";
-        for(let i=0; i<guessWord.length; i++){
-                result += this.selectedWord[i] === guessWord[i]? chalk.green(guessWord[i]): this.selectedWord.includes(guessWord[i])? chalk.yellow(guessWord[i]) : chalk.gray(guessWord[i]);    
-        }
-        return result;
-    }
 
     saveResult(win){
         console.log("And the result is saved", win, this.attempts);
