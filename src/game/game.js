@@ -1,9 +1,3 @@
-/*
-    const fs = require("fs");
-    const readline = require("readline");
-    const feedback = require("./feedback");
-    const chalk = require("chalk");
-*/
 import readline from "readline";
 
 import { validateGuess } from "../utils/validation.js";
@@ -48,7 +42,7 @@ export class Game {
 
             if(guess === this.selectedWord)
             {
-                console.log("Congratulations... you won the game:", this.attempts , this.attempts > 1? " attempts.": "attempt" );
+                console.log("Congratulations...  Correct Word in only", this.attempts , this.attempts > 1? " attempts.": "attempt" );
                 saveResult(true, this.attempts);
                 showStatistics();
                 return;
