@@ -3,7 +3,7 @@ import chalk from "chalk";
 export function giveFeedback(guessWord, selectedWord) {
         let result = "";
         let wordInfo = getWordInfo(guessWord, selectedWord);
-        console.log(wordInfo);
+        //  console.log(wordInfo);
 
         for(let i=0; i<guessWord.length; i++){
                 result += selectedWord[i] === guessWord[i]? chalk.green(guessWord[i]): 
@@ -21,10 +21,12 @@ export function errorMessage(){
 
 function isItYellow(guessWord, i, selectedWord, wordInfo) {
         let countInResult = selectedWord.split(guessWord[i]).length - 1;
-        let countInGuess =  guessWord.substring(0, i).split(guessWord[i]).length -1 -
-                wordInfo[guessWord[i]]?.ocurrences? wordInfo[guessWord[i]]?.ocurrences?.filter(x => x < i).length : 0;
+
+        let alreadyWritten = wordInfo[guessWord[i]]?.ocurrences? wordInfo[guessWord[i]]['ocurrences'].filter(x => x < i).length : 0;
+        let countInGuess =  guessWord.substring(0, i).split(guessWord[i]).length - alreadyWritten;
+                
         let countInExactPosition = wordInfo[guessWord[i]]?.number ?? 0;
-        console.log(guessWord[i], countInExactPosition, countInResult, countInGuess, wordInfo[guessWord[i]]?.ocurrences);
+        // console.log(guessWord[i], countInExactPosition, countInResult, countInGuess, wordInfo[guessWord[i]]);
         if(countInResult >= (countInGuess + countInExactPosition)) {
                 return chalk.yellow(guessWord[i]);
         }else {  
@@ -40,7 +42,7 @@ function getWordInfo( guessWord, selectedWord) {
                                 
                                 wordInfo[guessWord[i]] = {
                                         number : wordInfo[guessWord[i]].number + 1,
-                                        ocurrences: wordInfo[guessWord[i]].ocurrences.push[i]
+                                        ocurrences: [...wordInfo[guessWord[i]].ocurrences, i]
                                 }
 
                         }else {
