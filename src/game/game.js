@@ -10,7 +10,7 @@ export class Game {
         this.wordLength = 5;
         this.maxAttempts = 6;
         this.attempts = 0;
-        this.selectedWord =  getWord();
+        this.selectedWord =  "hatch"; // getWord();
     }
 
     loadGame(){

@@ -2,12 +2,13 @@ import chalk from "chalk";
 
 export function giveFeedback(guessWord, selectedWord) {
         let result = "";
+        let yellowGuess = {myGuess: ""}
         let wordInfo = getWordInfo(guessWord, selectedWord);
-        // console.log(wordInfo);
+        console.log(wordInfo);
 
         for(let i=0; i<guessWord.length; i++){
                 result += selectedWord[i] === guessWord[i]? chalk.green(guessWord[i]): 
-                selectedWord.includes(guessWord[i])? isItYellow(guessWord, i, selectedWord, wordInfo) : 
+                selectedWord.includes(guessWord[i])? isItYellow(guessWord, i, selectedWord, wordInfo, yellowGuess) : 
                 chalk.gray(guessWord[i]);    
         }
         return result;
@@ -19,11 +20,12 @@ export function errorMessage(){
 
 
 
-function isItYellow(guessWord, i, selectedWord, wordInfo) {
+function isItYellow(guessWord, i, selectedWord, wordInfo, yellowGuess) {
+        yellowGuess['myGuess'] = yellowGuess['myGuess'] + "" + guessWord[i]
         let countInResult = selectedWord.split(guessWord[i]).length - 1;
-        let countInGuess =  guessWord.substring(0, i).split(guessWord[i]).length -1 ;
+        let countInGuess =  yellowGuess['myGuess'].substring(0, i).split(guessWord[i]).length -2 ;
         let countInExactPosition = wordInfo[guessWord[i]] ?? 0;
-        // console.log(countInExactPosition, countInResult, countInGuess);
+        console.log(guessWord[i], yellowGuess['myGuess'], countInExactPosition, countInResult, countInGuess);
         if(countInResult > (countInGuess + countInExactPosition)) {
                 return chalk.yellow(guessWord[i]);
                
