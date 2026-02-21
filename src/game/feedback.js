@@ -21,12 +21,12 @@ export function errorMessage(){
 
 function isItYellow(guessWord, i, selectedWord, wordInfo) {
         let countInResult = selectedWord.split(guessWord[i]).length - 1;
-        let countInGuess =  guessWord.substring(0, i).split(guessWord[i]).length -1 ;
-        let countInExactPosition = wordInfo[guessWord[i]] ?? 0;
-        console.log(guessWord[i], countInExactPosition, countInResult, countInGuess);
-        if(countInResult > (countInGuess + countInExactPosition)) {
+        let countInGuess =  guessWord.substring(0, i).split(guessWord[i]).length -1 -
+                wordInfo[guessWord[i]]?.ocurrences? wordInfo[guessWord[i]]?.ocurrences?.filter(x => x < i).length : 0;
+        let countInExactPosition = wordInfo[guessWord[i]]?.number ?? 0;
+        console.log(guessWord[i], countInExactPosition, countInResult, countInGuess, wordInfo[guessWord[i]]?.ocurrences);
+        if(countInResult >= (countInGuess + countInExactPosition)) {
                 return chalk.yellow(guessWord[i]);
-               
         }else {  
                 return chalk.gray(guessWord[i]);
         }
@@ -37,9 +37,17 @@ function getWordInfo( guessWord, selectedWord) {
          for(let i=0; i<guessWord.length; i++){
                 if(selectedWord[i] === guessWord[i]) {
                         if(wordInfo[guessWord[i]]) {
-                                wordInfo[guessWord[i]] += 1;
+                                
+                                wordInfo[guessWord[i]] = {
+                                        number : wordInfo[guessWord[i]].number + 1,
+                                        ocurrences: wordInfo[guessWord[i]].ocurrences.push[i]
+                                }
+
                         }else {
-                                wordInfo[guessWord[i]] = 1;
+                                wordInfo[guessWord[i]] = {
+                                        number : 1,
+                                        ocurrences: [i]
+                                }
                         }
                 }  
         }
