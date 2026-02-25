@@ -1,8 +1,8 @@
 import readline from "readline";
 
 import { validateGuess } from "../utils/validation.js";
-import { giveFeedback, errorMessage } from "./feedback.js";
-import { showStatistics, getWord, saveResult } from "../services/fileHandle.js";
+import { giveFeedback, failureMessage } from "./feedback.js";
+import { showStatistics, saveResult, wordList } from "../services/fileHandle.js";
 
 
 export class Game {
@@ -10,7 +10,9 @@ export class Game {
         this.wordLength = 5;
         this.maxAttempts = 6;
         this.attempts = 0;
-        this.selectedWord =  getWord();
+        this.allWords = wordList();
+        this.selectedWord =  this.getAWord();
+        
     }
 
     loadGame(){
@@ -29,13 +31,13 @@ export class Game {
 
         rl.question("Enter your guess: ", (userInput)=>{
             const guess = userInput.trim().toLowerCase();
-            if(validateGuess(guess)){
+            if(validateGuess(guess, this.allWords)){
                 this.attempts += 1;
                 console.log("Your guess is valid:=>   ", giveFeedback(guess, this.selectedWord));
                 
             }
             else {
-                errorMessage();
+                failureMessage();
             }
 
             rl.close();
@@ -59,5 +61,9 @@ export class Game {
             
         })
 
+    }
+
+    getAWord(){
+        return this.allWords[Math.floor(Math.random() * this.allWords.length)];
     }
 }

@@ -3,7 +3,6 @@ import chalk from "chalk";
 export function giveFeedback(guessWord, selectedWord) {
         let result = "";
         let matchedResult = findProperColor(guessWord, selectedWord) ;
-        console.log(matchedResult);
         for(let i=0; i<guessWord.length; i++){
                 let color = matchedResult[i];
                 if(color === 'green') {
@@ -17,7 +16,7 @@ export function giveFeedback(guessWord, selectedWord) {
         return result;
     }
 
-export function errorMessage(){
+export function failureMessage(){
         console.log(chalk.red("your guess is not valid. Try again."));
 }
 
