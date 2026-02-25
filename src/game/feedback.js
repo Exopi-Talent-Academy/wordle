@@ -20,7 +20,7 @@ export function failureMessage(){
         console.log(chalk.red("your guess is not valid. Try again."));
 }
 
-function findProperColor(guessWord, targetWord) {
+export function findProperColor(guessWord, targetWord) {
         let matchedResult = {
                 0: '',
                 1: '',
