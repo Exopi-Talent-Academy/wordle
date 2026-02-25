@@ -2,9 +2,9 @@ import chalk from "chalk";
 
 export function giveFeedback(guessWord, selectedWord) {
         let result = "";
-        let matchedResult = findProperColor(guessWord, selectedWord) ;
+        const matchedResult = findProperColor(guessWord, selectedWord) ;
         for(let i=0; i<guessWord.length; i++){
-                let color = matchedResult[i];
+                const color = matchedResult[i];
                 if(color === 'green') {
                         result += chalk.green(guessWord[i]);
                 } else if(color === 'yellow') {
@@ -21,15 +21,15 @@ export function failureMessage(){
 }
 
 export function findProperColor(guessWord, targetWord) {
-        let matchedResult = {
+        const matchedResult = {
                 0: '',
                 1: '',
                 2: '',
                 3: '',
                 4: ''
         }
-        let guessWordArray = guessWord.split('');
-        let targetWordArray = targetWord.split('');
+        const guessWordArray = guessWord.split('');
+        const targetWordArray = targetWord.split('');
 
         guessWordArray.forEach((char, index) => {
                 if(char === targetWordArray[index]) {
