@@ -2,7 +2,7 @@ import readline from "readline";
 
 import { validateGuess } from "../utils/validation.js";
 import { giveFeedback, failureMessage } from "./feedback.js";
-import { showStatistics, saveResult, wordList } from "../services/fileHandle.js";
+import { showStatistics, saveResult, readWordsFromFile, getRandomWord } from "../services/fileHandle.js";
 
 
 export class Game {
@@ -10,8 +10,8 @@ export class Game {
         this.wordLength = 5;
         this.maxAttempts = 6;
         this.attempts = 0;
-        this.allWords = wordList();
-        this.selectedWord =  this.getAWord();
+        this.allWords = readWordsFromFile();
+        this.selectedWord =  getRandomWord();
         
     }
 
