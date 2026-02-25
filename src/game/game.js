@@ -24,6 +24,8 @@ export class Game {
 
 
     yourGuess(){
+        console.log(this.allWords.length);
+        console.log(this.selectedWord);
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -61,9 +63,5 @@ export class Game {
             
         })
 
-    }
-
-    getAWord(){
-        return this.allWords[Math.floor(Math.random() * this.allWords.length)];
     }
 }

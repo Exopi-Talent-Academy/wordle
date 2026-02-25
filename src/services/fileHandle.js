@@ -19,7 +19,7 @@ export function readWordsFromFile(){
 
 export function getRandomWord() {
     let wordList = readWordsFromFile();
-    return wordList[Math.floor(Math.random()) * wordList.length]
+    return wordList[Math.floor(Math.random() * wordList.length)]
 }
 
 export function saveResult(win, attempts){
