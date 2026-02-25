@@ -2,7 +2,7 @@ import readline from "readline";
 
 import { validateGuess } from "../utils/validation.js";
 import { giveFeedback, errorMessage } from "./feedback.js";
-import { showStatistics, loadWords, saveResult } from "../services/fileHandle.js";
+import { showStatistics, getWord, saveResult } from "../services/fileHandle.js";
 
 
 export class Game {
@@ -10,7 +10,7 @@ export class Game {
         this.wordLength = 5;
         this.maxAttempts = 6;
         this.attempts = 0;
-        this.selectedWord = "hatch";//loadWords();
+        this.selectedWord =  getWord();
     }
 
     loadGame(){
