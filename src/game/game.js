@@ -15,7 +15,7 @@ export class Game {
     this.maxAttempts = 6;
     this.attempts = 0;
     this.allWords = readWordsFromFile();
-    this.selectedWord = getRandomWord();
+    this.selectedWord = "pasta"; // getRandomWord();
   }
 
   loadGame() {
@@ -26,8 +26,6 @@ export class Game {
   }
 
   yourGuess() {
-    console.log(this.allWords.length);
-    console.log(this.selectedWord);
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
