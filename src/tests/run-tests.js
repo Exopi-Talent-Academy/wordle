@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
+import chalk from "chalk";
 
 const root = path.resolve("src/tests");
 
@@ -28,15 +29,19 @@ async function run() {
       } else {
         throw new Error("No run() export found in " + file);
       }
-      console.log("OK");
+      console.log(chalk.green("OK"));
       passed++;
     } catch (e) {
-      console.log("FAIL");
+      console.log(chalk.red("FAIL"));
       console.error(e);
       failed++;
     }
   }
-  console.log(`\nSummary: ${passed} passed, ${failed} failed`);
+  console.log(
+    chalk.blue(
+      `\n\tSummary: ${chalk.green(`${passed} passed`)}, ${chalk.red(`${failed} failed`)}`,
+    ),
+  );
   if (failed > 0) process.exitCode = 1;
 }
 
