@@ -31,3 +31,35 @@ A fun and interactive Wordle game built with Node.js and JavaScript. Challenge y
    git clone https://github.com/Exopi-Talent-Academy/wordle.git
    cd wordle
    ```
+2. **Run the Game**
+
+   ```bash
+   node index.js
+   ```
+
+3. **Guess the word**
+
+   ```bash
+   Enter 5-letter word
+   Word having the meaning
+   Wrong word does not count
+   ```
+
+4. **Feedback**
+   ```bash
+   Green - for correct letter in right position.
+   Yellow - for correct letter in wrong position.
+   Gray - for wrong letters.
+   ```
+5. **Save the performance**
+   ```bash
+   All the performance is recorded in a file.
+   fx:
+     false: 6  ( failed to guess the word in all the given attempts)
+     true: 3 ( guessed the correct word in the third attempt)
+   ```
+6. **Run the Game**
+   ```bash
+   Displays a success / failure message with a table.
+   Table shows the total and succeed in corresponding attempts
+   ```
