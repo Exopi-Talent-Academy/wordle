@@ -25,6 +25,14 @@ export function showStatistics() {
     ["total", "first", "second", "third", "fourth", "fifth", "sixth"],
   );
 }
+/**
+ * Reads data from a file and returns an array of words.
+ *
+ * @returns Array
+ * @example
+ * const words = readWordsFromFile();
+ * console.log(words); // Output: ["apple", "grape", "peach", "mango", "berry"]
+ */
 
 export function readWordsFromFile() {
   let allWords = fs.readFileSync("./src/data/words.txt", "utf8");
