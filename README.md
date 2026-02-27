@@ -2,9 +2,13 @@
 
 A fun and interactive Wordle game built with Node.js and JavaScript. Challenge yourself to guess the secret word in 6 attempts!
 
-![Game Screenshot](https://via.placeholder.com/800x400?text=Wordle+Game+Screenshot)
+<img width="808" height="579" alt="Screenshot (8)" src="https://github.com/user-attachments/assets/42fd6ee3-21b3-41f9-bd57-19c989d8e95a" />
+
+
 
 ## 🎮 Live Demo
+   
+http://localhost:4200/
 
 ## ✨ Features
 
