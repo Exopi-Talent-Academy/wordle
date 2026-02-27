@@ -19,7 +19,7 @@ export class Game {
   }
 
   loadGame() {
-    console.log("Welcome to to WORDLE!!!");
+    console.log("Welcome to WORDLE!!!");
     console.log("Remember you have only 6 attempts");
 
     this.yourGuess();

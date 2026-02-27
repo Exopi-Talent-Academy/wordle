@@ -37,10 +37,10 @@ async function run() {
       failed++;
     }
   }
+  const failedMsg =
+    failed > 0 ? chalk.red(`${failed} failed`) : chalk.green("all passed");
   console.log(
-    chalk.blue(
-      `\n\tSummary: ${chalk.green(`${passed} passed`)}, ${chalk.red(`${failed} failed`)}`,
-    ),
+    chalk.blue(`\n\tSummary: ${chalk.green(`${passed} passed`)}, ${failedMsg}`),
   );
   if (failed > 0) process.exitCode = 1;
 }
