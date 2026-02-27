@@ -20,6 +20,28 @@ export function failureMessage() {
   console.log(chalk.red("your guess is not valid. Try again."));
 }
 
+/**
+ 
+ * Compare two strings and return an object indicating the color feedback for each letter.
+ 
+ * 
+ 
+ * @param {string} guessWord - The first string to compare.
+ 
+ * @param {string} selectedWord - The second string to compare.
+ 
+ * @returns {object} The result of comparing guessWord and selectedWord.
+ 
+ * 
+ 
+ * @example
+ 
+ * const matchedResult = findProperColor("hello", "world");
+ 
+ * console.log(matchedResult); // Output: {0: "gray", 1: "gray", 2: "gray", 3: "green", 4: "yellow"}
+ 
+ */
+
 export function findProperColor(guessWord, targetWord) {
   const matchedResult = {
     0: "",
