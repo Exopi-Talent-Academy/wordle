@@ -1,5 +1,27 @@
 import chalk from "chalk";
 
+/**
+ 
+ * Compare the guessWord with the selectedWord and return a string with colored letters based on the feedback.
+ 
+ * 
+ 
+ * @param {string} guessWord - The first string to compare.
+ 
+ * @param {string} selectedWord - The second string to compare.
+ 
+ * @returns {object} The result of comparing guessWord and selectedWord, with letters colored according to the feedback.
+ 
+ * 
+ 
+ * @example
+ 
+ * const result = giveFeedback("hello", "world");
+ 
+ * console.log(result); // Output: "gray gray gray green yellow"
+ 
+ */
+
 export function giveFeedback(guessWord, selectedWord) {
   let result = "";
   const matchedResult = findProperColor(guessWord, selectedWord);
